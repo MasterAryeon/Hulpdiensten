@@ -1,0 +1,10 @@
+-=-=-=-=-=-=-=-=-=-=-=-
+Project Software Engineering - door Aron Cornet en Tim Goossens
+Specificatie 2.0
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Loading file - stad2.0_bis.xml - succesful
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Loading file - voertuigen2.0_bis.xml - succesful
+-=-=-=-=-=-=-=-=-=-=-=-
