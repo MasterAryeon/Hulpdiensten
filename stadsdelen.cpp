@@ -50,127 +50,118 @@ bool Stad::properlyInitialized()
 void Stad::setStadsdeel(Stadsdeel &s)
 {
 	//REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling stStadsdeel");
-	switch (s.getType())
+	if ((dynamic_cast<Brandweerkazerne*>(&s)) != nullptr)
 	{
-		case Stadsdeel::Station:
+		std::pair<int, int> l = s.getLocatie();
+		for (int i = l.second; i > (l.second - 4); i--)
 		{
-			std::pair<int, int> l = s.getLocatie();
-			for (int i = l.second; i > (l.second - 4); i--)
+			for (int j = l.first; j < (l.first + 4); j++)
 			{
-				for (int j = l.first; j < (l.first + 4); j++)
-				{
-					grid[i][j] = &s;
-				}
+				grid[i][j] = &s;
 			}
-			break;
 		}
-		case Stadsdeel::Police:
+	}
+	else if ((dynamic_cast<Politiebureau*>(&s)) != nullptr)
+	{
+		std::pair<int, int> l = s.getLocatie();
+		std::pair<int, int> g = s.getGrootte();
+		for (int i = l.second; i >(l.second - g.first); i--)
 		{
-			std::pair<int, int> l = s.getLocatie();
-			std::pair<int, int> g = s.getGrootte();
-			for (int i = l.second; i >(l.second - g.first); i--)
+			for (int j = l.first; j < (l.first + g.second); j++)
 			{
-				for (int j = l.first; j < (l.first + g.second); j++)
-				{
-					grid[i][j] = &s;
-				}
+				grid[i][j] = &s;
 			}
-			break;
 		}
-		case Stadsdeel::Hospital:
+	}
+	else if ((dynamic_cast<Ziekenhuis*>(&s)) != nullptr)
+	{
+		std::pair<int, int> l = s.getLocatie();
+		std::pair<int, int> g = s.getGrootte();
+		for (int i = l.second; i >(l.second - g.first); i--)
 		{
-			std::pair<int, int> l = s.getLocatie();
-			std::pair<int, int> g = s.getGrootte();
-			for (int i = l.second; i >(l.second - g.first); i--)
+			for (int j = l.first; j < (l.first + g.second); j++)
 			{
-				for (int j = l.first; j < (l.first + g.second); j++)
-				{
-					grid[i][j] = &s;
-				}
+				grid[i][j] = &s;
 			}
-			break;
 		}
-		case Stadsdeel::Street:
+	}
+	else if ((dynamic_cast<Straat*>(&s)) != nullptr)
+	{
+		std::pair<int, int> b = s.getBegin();  std::pair<int, int> e = s.getEinde();
+		if (b.first == e.first)
 		{
-			std::pair<int, int> b = s.getBegin();  std::pair<int, int> e = s.getEinde();
-			if (b.first == e.first)
+			for (int i = (b.second); i <= (e.second); i++)
 			{
-				for (int i = (b.second); i <= (e.second); i++)
+				Stadsdeel* t = grid[i][b.first];
+				if (t == nullptr)
 				{
-					Stadsdeel* t = grid[i][b.first];
-					if (t == nullptr)
+					grid[i][b.first] = &s;
+				}
+				else
+				{
+					if (grid[i][b.first]->getType() == 6)
 					{
-						grid[i][b.first] = &s;
+						Kruispunt* k = new Kruispunt();
+						k->setEersteStraat(grid[i][b.first]->getNaam());
+						k->setTweedeStraat(s.getNaam());
+						k->setLocatie(s.getLocatie());
+						grid[i][b.first] = k;
 					}
 					else
 					{
-						if (grid[i][b.first]->getType() == 6)
-						{
-							Kruispunt* k = new Kruispunt();
-							k->setEersteStraat(grid[i][b.first]->getNaam());
-							k->setTweedeStraat(s.getNaam());
-							k->setLocatie(s.getLocatie());
-							grid[i][b.first] = k;
-						}
-						else
-						{
-							break; // HIER MOET NOG WAT WERK VERRICHT WORDEN VANWEGE DE BREAK-OUT
-						}
+						break; // HIER MOET NOG WAT WERK VERRICHT WORDEN VANWEGE DE BREAK-OUT
 					}
 				}
 			}
-			else
+		}
+		else
+		{
+			for (int i = (b.first); i <= (e.first); i++)
 			{
-				for (int i = (b.first); i <= (e.first); i++)
+				Stadsdeel* t = grid[b.second][i];
+				if (t == nullptr)
 				{
-					Stadsdeel* t = grid[b.second][i];
-					if (t == nullptr)
+					grid[b.second][i] = &s;
+				}
+				else
+				{
+					if (grid[i][b.first]->getType() == 3)
 					{
-						grid[b.second][i] = &s;
+						Kruispunt* k = new Kruispunt();
+						k->setEersteStraat(grid[i][b.first]->getNaam());
+						k->setTweedeStraat(s.getNaam());
+						k->setLocatie(s.getLocatie());
+						grid[b.second][i] = k;
 					}
 					else
 					{
-						if (grid[i][b.first]->getType() == 3)
-						{
-							Kruispunt* k = new Kruispunt();
-							k->setEersteStraat(grid[i][b.first]->getNaam());
-							k->setTweedeStraat(s.getNaam());
-							k->setLocatie(s.getLocatie());
-							grid[b.second][i] = k;
-						}
-						else
-						{
-							break; // HIER MOET NOG WAT WERK VERRICHT WORDEN VANWEGE DE BREAK-OUT
-						}
+						break; // HIER MOET NOG WAT WERK VERRICHT WORDEN VANWEGE DE BREAK-OUT
 					}
 				}
 			}
-			break;
 		}
-		case Stadsdeel::Store:
+	}
+	else if ((dynamic_cast<Winkel*>(&s)) != nullptr)
+	{
+		std::pair<int, int> l = s.getLocatie();
+		std::pair<int, int> g = s.getGrootte();
+		for (int i = l.second; i >(l.second - g.first); i--)
 		{
-			std::pair<int, int> l = s.getLocatie();
-			std::pair<int, int> g = s.getGrootte();
-			for (int i = l.second; i >(l.second - g.first); i--)
+			for (int j = l.first; j < (l.first + g.second); j++)
 			{
-				for (int j = l.first; j < (l.first + g.second); j++)
-				{
-					grid[i][j] = &s;
-				}
+				grid[i][j] = &s;
 			}
-			break;
 		}
-		case Stadsdeel::House:
+	}
+	else if ((dynamic_cast<Huis*>(&s)) != nullptr)
+	{
+		std::pair<int, int> l = s.getLocatie();
+		for (int i = l.second; i >(l.second - 2); i--)
 		{
-			std::pair<int, int> l = s.getLocatie();
-			for (int i = l.second; i > (l.second - 2); i--)
+			for (int j = l.first; j < (l.first + 2); j++)
 			{
-				for (int j = l.first; j < (l.first + 2); j++)
-				{
-					grid[i][j] = &s;
-				}
+				grid[i][j] = &s;
 			}
-			break;
 		}
 	}
 }
@@ -191,11 +182,11 @@ bool Stad::checkAangrenzing(Stadsdeel* s)
 {
 	//REQUIRE(this->properlyInitialized(), "Stad not properly initialized");
 	int aantal = 0;
-	if (s->getType() == Stadsdeel::Station)
+	if ((dynamic_cast<Politiebureau*>(s)) != nullptr)
 	{
 		aantal = 4;
 	}
-	else if (s->getType() == Stadsdeel::House)
+	else if ((dynamic_cast<Huis*>(s)) != nullptr)
 	{
 		aantal = 2;
 	}
@@ -208,7 +199,7 @@ bool Stad::checkAangrenzing(Stadsdeel* s)
 		{
 			l.first = i; l.second = j;
 			t = getStadsdeel(l);
-			if (t->getType() == Stadsdeel::Street)
+			if ((dynamic_cast<Straat*>(t)) != nullptr)
 			{
 				return true;
 			}
@@ -247,22 +238,14 @@ void Stad::printStad()
 					found = true;
 				}
 			}
-			//if (i == 7 && j == 8)
-			//{
-			//	lijn = lijn + "!" + " ";
-			//	found = true;
-			//}
 			if (!found)
 			{
 				vak = grid[i][j];
 				lijn = lijn + vak->getKarakter() + " ";
 			}
 		}
-		//std::cout + lijn );
-		
 		output.writeToStatus( lijn );
 	}
-	//output.writeToStatus( "~~~~~~~~~~~~~~~~~~~" );
 }
 bool Stad::checkBestemming(Stadsdeel* s, std::pair<int, int> p)
 {
@@ -306,7 +289,7 @@ Stad::StraatType Stad::checkStraat(Stadsdeel* s, std::pair<int, int> p)
 {
 	Stadsdeel* vak = getStadsdeel(p);
 	std::pair<int, int> locatie = s->getLocatie();
-	if (vak->getType() == Stadsdeel::Street)
+	if ((dynamic_cast<Straat*>(vak)) != nullptr)
 	{
 		std::pair<int, int> s1 = vak->getBegin();
 		std::pair<int, int> s2 = vak->getEinde();
@@ -328,7 +311,7 @@ Stad::StraatType Stad::checkStraat(Stadsdeel* s, std::pair<int, int> p)
 			
 		} 
 	}
-	if (vak->getType() == Stadsdeel::Crossroad)
+	if ((dynamic_cast<Kruispunt*>(vak)) != nullptr)
 	{
 		int x = (locatie.first - p.second);
 		if (x <= 1 && x >= -1)
@@ -346,7 +329,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 {
 	Stadsdeel* vak = getStadsdeel(p);
 	std::pair<int, int> locatie = s->getLocatie();
-	if (vak->getType() == Stadsdeel::Street)
+	if ((dynamic_cast<Straat*>(vak)) != nullptr)
 	{
 		std::pair<int, int> s1 = vak->getBegin();
 		std::pair<int, int> s2 = vak->getEinde();
@@ -360,7 +343,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 			{
 				std::pair<int, int> p2; p2.first = i; p2.second = p.second;
 				Stadsdeel* tijdelijk = getStadsdeel(p2);
-				if (tijdelijk->getType() == Stadsdeel::Crossroad)
+				if ((dynamic_cast<Kruispunt*>(tijdelijk)) != nullptr)
 				{
 					onderlid = p2;
 					onderafstand = abs(onderlid.first - s->getLocatie().second) + abs(onderlid.second - s->getLocatie().first);
@@ -371,7 +354,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 			{
 				std::pair<int, int> p2; p2.first = i; p2.second = p.second;
 				Stadsdeel* tijdelijk = getStadsdeel(p2);
-				if (tijdelijk->getType() == Stadsdeel::Crossroad)
+				if ((dynamic_cast<Kruispunt*>(tijdelijk)) != nullptr)
 				{
 					bovenlid = p2;
 					bovenafstand = abs(bovenlid.first - s->getLocatie().second) + abs(bovenlid.second - s->getLocatie().first);
@@ -401,7 +384,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 			{
 				std::pair<int, int> p2; p2.first = p.first; p2.second = i;
 				Stadsdeel* tijdelijk = getStadsdeel(p2);
-				if (tijdelijk->getType() == Stadsdeel::Crossroad)
+				if ((dynamic_cast<Kruispunt*>(tijdelijk)) != nullptr)
 				{
 					linkerlid = p2;
 					linkerafstand = abs(linkerlid.first - s->getLocatie().second) + abs(linkerlid.second - s->getLocatie().first);
@@ -412,7 +395,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 			{
 				std::pair<int, int> p2; p2.first = p.first; p2.second = i;
 				Stadsdeel* tijdelijk = getStadsdeel(p2);
-				if (tijdelijk->getType() == Stadsdeel::Crossroad)
+				if ((dynamic_cast<Kruispunt*>(tijdelijk)) != nullptr)
 				{
 					rechterlid = p2;
 					rechterafstand = abs(rechterlid.first - s->getLocatie().second) + abs(rechterlid.second - s->getLocatie().first);
@@ -437,7 +420,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 			//std::cout + linkerafstand + "|" + rechterafstand );
 		} 
 	}
-	if (vak->getType() == Stadsdeel::Crossroad)
+	if ((dynamic_cast<Kruispunt*>(vak)) != nullptr)
 	{
 		std::pair<int, int> bovenlid; int bovenafstand = -1;
 		std::pair<int, int> onderlid; int onderafstand = -1;
@@ -450,7 +433,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 			Stadsdeel* tijdelijk = getStadsdeel(p2);
 			if (tijdelijk != nullptr)
 			{
-				if (tijdelijk->getType() == Stadsdeel::Crossroad)
+				if ((dynamic_cast<Kruispunt*>(tijdelijk)) != nullptr)
 				{
 					onderlid = p2;
 					onderafstand = abs(onderlid.first - s->getLocatie().second) + abs(onderlid.second - s->getLocatie().first);
@@ -468,7 +451,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 			Stadsdeel* tijdelijk = getStadsdeel(p2);
 			if (tijdelijk != nullptr)
 			{
-				if (tijdelijk->getType() == Stadsdeel::Crossroad)
+				if ((dynamic_cast<Kruispunt*>(tijdelijk)) != nullptr)
 				{
 					bovenlid = p2;
 					bovenafstand = abs(bovenlid.first - s->getLocatie().second) + abs(bovenlid.second - s->getLocatie().first);
@@ -486,7 +469,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 			Stadsdeel* tijdelijk = getStadsdeel(p2);
 			if (tijdelijk != nullptr)
 			{
-				if (tijdelijk->getType() == Stadsdeel::Crossroad)
+				if ((dynamic_cast<Kruispunt*>(tijdelijk)) != nullptr)
 				{
 					linkerlid = p2;
 					int t1 = abs(linkerlid.first - s->getLocatie().second);
@@ -507,7 +490,7 @@ Stadsdeel::Richting Stad::checkRichting(Stadsdeel* s, std::pair<int, int> p)
 			Stadsdeel* tijdelijk = getStadsdeel(p2);
 			if (tijdelijk != nullptr)
 			{
-				if (tijdelijk->getType() == Stadsdeel::Crossroad)
+				if ((dynamic_cast<Kruispunt*>(tijdelijk)) != nullptr)
 				{
 					rechterlid = p2;
 					rechterafstand = abs(rechterlid.first - s->getLocatie().second) + abs(rechterlid.second - s->getLocatie().first);
@@ -1015,7 +998,7 @@ void Stad::simulatie2()
 		Stadsdeel* vak = getStadsdeel(locatie);
 		if (!checkBestemming(brandweerwagens_onroad[i].first, locatie))
 		{
-			if (vak->getType() != Stadsdeel::Crossroad)
+			if ((dynamic_cast<Kruispunt*>(vak)) == nullptr)
 			{
 				output.writeToStatus(brandweerwagens_onroad[i].second->getNaam() + " op locatie (" + std::to_string(t.second) + "," + std::to_string(t.first) + ") in de " + vak->getNaam());
 				output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
@@ -1031,7 +1014,7 @@ void Stad::simulatie2()
 		}
 		else
 		{
-			if (brandweerwagens_onroad[i].first->getType() == Stadsdeel::Type::Station)
+			if (dynamic_cast<Brandweerkazerne*>(brandweerwagens_onroad[i].first) != nullptr)
 			{
 				toRemoveBrandweer.push_back(i);
 				output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
@@ -1067,7 +1050,7 @@ void Stad::simulatie2()
 	output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
 	for (int i = 0; i < brandweerwagens_onroad.size(); i++)
 	{
-		if (brandweerwagens_onroad[i].first->getType() != Stadsdeel::Type::Station)
+		if (dynamic_cast<Brandweerkazerne*>(brandweerwagens_onroad[i].first) == nullptr)
 		{
 			output.writeToStatus("Huis op locatie (" + std::to_string(brandweerwagens_onroad[i].first->getLocatie().second) + "," + std::to_string(brandweerwagens_onroad[i].first->getLocatie().first) + ") staat nog in brand met " + std::to_string(brandweerwagens_onroad[i].first->getBrandbaarheid()) + " brandbaarheid over");
 			brandweerwagens_onroad[i].first->setBrandbaarheid(brandweerwagens_onroad[i].first->getBrandbaarheid() - 1);
@@ -1143,7 +1126,7 @@ void Stad::simulatie2()
 		Stadsdeel* vak = getStadsdeel(locatie);
 		if (!checkBestemming(politiewagens_onroad[i].first, locatie))
 		{
-			if (vak->getType() != Stadsdeel::Crossroad)
+			if (dynamic_cast<Kruispunt*>(vak) == nullptr)
 			{
 				output.writeToStatus(politiewagens_onroad[i].second->getNaam() + " op locatie (" + std::to_string(t.second) + "," + std::to_string(t.first) + ") in de " + vak->getNaam());
 				output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
@@ -1159,7 +1142,7 @@ void Stad::simulatie2()
 		}
 		else
 		{
-			if (politiewagens_onroad[i].first->getType() == Stadsdeel::Type::Police)
+			if (dynamic_cast<Politiebureau*>(politiewagens_onroad[i].first) != nullptr)
 			{
 				toRemovePolitie.push_back(i);
 				output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
@@ -1195,7 +1178,7 @@ void Stad::simulatie2()
 	output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
 	for (int i = 0; i < politiewagens_onroad.size(); i++)
 	{
-		if (politiewagens_onroad[i].first->getType() != Stadsdeel::Type::Police)
+		if (dynamic_cast<Politiebureau*>(politiewagens_onroad[i].first) == nullptr)
 		{
 			output.writeToStatus("Winkel op locatie (" + std::to_string(politiewagens_onroad[i].first->getLocatie().second) + "," + std::to_string(politiewagens_onroad[i].first->getLocatie().first) + ") wordt nog overvallen met " + std::to_string(politiewagens_onroad[i].first->getOvervalbaarheid()) + " overvalbaarheid over");
 			politiewagens_onroad[i].first->setOvervalbaarheid(politiewagens_onroad[i].first->getOvervalbaarheid() - 1);
@@ -1470,7 +1453,7 @@ bool Stad::checkStad()
 		
 		
 		
-		if (current->getType() == Stadsdeel::House)
+		if (dynamic_cast<Huis*>(current) != nullptr)
 		{	
 			if (checkAangrenzing(current) == false)
 			{
@@ -1495,7 +1478,7 @@ bool Stad::checkStad()
 				}
 			}
 		}
-		else if (current->getType() == Stadsdeel::Station)
+		else if (dynamic_cast<Huis*>(current) != nullptr)
 		{
 			if (checkAangrenzing(current) == false)
 			{
@@ -2316,7 +2299,7 @@ void UI::startBrand()
 	std::cout << "Geef de y coordinaat van het huis op: ";
 	std::cin >> y;
 	coord.first = y; coord.second = x; 
-	if (stad->getStadsdeel(coord)->getType() == Stadsdeel::Type::House)
+	if (dynamic_cast<Huis*>(stad->getStadsdeel(coord)) != nullptr)
 	{
 		stad->brandhuizen.push_back(stad->getStadsdeel(coord));
 	}
