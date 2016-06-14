@@ -19,12 +19,14 @@ public:
 	bool properlyInitialized();
 	enum Type { Station, Police, Hospital, Wagon, House, Store, Street, Crossroad, Policewagon, Ambulancewagon };
 	enum Richting { Links, Rechts, Onder, Boven };
+	virtual bool getInBrand();
 	virtual std::pair<int, int> getLocatie();
 	virtual std::pair<int, int> getBegin();
 	virtual std::pair<int, int> getEinde();
 	virtual std::pair<int, int> getGrootte();
 	virtual int getBrandbaarheid();
 	virtual int getOvervalbaarheid();
+	virtual void setInBrand(bool);
 	virtual void setBrandbaarheid(int);
 	virtual void setOvervalbaarheid(int);
 	virtual char getKarakter();
@@ -33,6 +35,7 @@ public:
 	virtual std::string getEersteStraat();
 	virtual std::string getTweedeStraat();
 private:
+	bool inBrand;
 	int brandbaarheid;
 	int overvalbaarheid;
 	Stadsdeel* _initCheck;
@@ -62,7 +65,7 @@ private:
 	std::string naam;
 	std::pair<int, int> locatie;
 	std::pair<int, int> ingang;
-	char karakter = 'X';
+	char karakter = 'K';
 	Type type = Station;
 	Brandweerkazerne* _initCheck;
 };
@@ -233,7 +236,7 @@ private:
 	std::string naam;
 	std::pair<int, int> begin;
 	std::pair<int, int> einde;
-	char karakter = '_';
+	char karakter = ' ';
 	Type type = Street;
 	Straat* _initCheck;
 };
@@ -249,6 +252,8 @@ public:
 	*/
 	Huis();
 	bool properlyInitialized();
+	bool getInBrand();
+	void setInBrand(bool);
 	void setLocatie(std::pair<int, int>);
 	int getBrandbaarheid();
 	void setBrandbaarheid(int);
@@ -257,6 +262,7 @@ public:
 	Type getType();
 private:
 	std::pair<int, int> locatie;
+	bool inBrand;
 	int brandbaarheid;
 	char karakter = 'H';
 	Type type = House;
@@ -273,6 +279,8 @@ public:
 	*/
 	Winkel();
 	bool properlyInitialized();
+	bool getInBrand();
+	void setInBrand(bool);
 	void setLocatie(std::pair<int, int>);
 	int getBrandbaarheid();
 	int getOvervalbaarheid();
@@ -286,6 +294,7 @@ public:
 private:
 	std::pair<int, int> locatie;
 	std::pair<int, int> grootte;
+	bool inBrand;
 	int brandbaarheid; int overvalbaarheid;
 	char karakter = 'W';
 	Type type = Store;
@@ -314,7 +323,7 @@ private:
 	std::string eersteStraat = "";
 	std::string tweedeStraat = "";
 	std::pair<int, int> locatie;
-	char karakter = 'O';
+	char karakter = ' ';
 	Type type = Crossroad;
 	Kruispunt* _initCheck;
 };

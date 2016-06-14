@@ -213,16 +213,16 @@ void Stad::printStad()
 	output.writeToStatus( "Legenda:" );
 	output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
 	output.writeToStatus( "H = Onderdeel van een huis" );
-	output.writeToStatus( "X = Onderdeel van de kazerne" );
+	output.writeToStatus( "# = Onderdeel van een brandend huis");
+	output.writeToStatus( "K = Onderdeel van de kazerne" );
 	output.writeToStatus( "Z = Onderdeel van het ziekenhuis" );
 	output.writeToStatus( "P = Onderdeel van het politiebureau" );
 	output.writeToStatus( "W = Onderdeel van de winkel" );
-	output.writeToStatus( "_ = Onderdeel van een straat" );
-	output.writeToStatus( "O = Een kruispunt" );
+	output.writeToStatus( "  = Onderdeel van een straat" );
 	output.writeToStatus("-=-=-=-=-=-=-=-=-=-=-=-");
-	output.writeToStatus( "b = Brandweerwagen" );
-	output.writeToStatus("a = Ambulance");
-	output.writeToStatus("p = Politiewagen");
+	output.writeToStatus( "* = Brandweerwagen" );
+	output.writeToStatus( "= = Ambulance");
+	output.writeToStatus( "% = Politiewagen");
 	output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
 	for (int i = (xrow-1); i >= 0; i--)
 	{
@@ -230,13 +230,23 @@ void Stad::printStad()
 		for (int j = 0; j < yrow; j++)
 		{
 			bool found = false;
-			std::pair<int, int> remember;
+			std::pair<int, int> p;
+			p.first = i; p.second = j;
+			Stadsdeel* t = getStadsdeel(p);
+			if (dynamic_cast<Huis*>(t) != nullptr || dynamic_cast<Winkel*>(t) != nullptr)
+			{
+				if (t->getInBrand())
+				{
+					lijn = lijn + "#" + " ";
+					found = true;
+				}
+			}
 			for (int k = 0; k < brandweerwagens_onroad.size(); k++)
 			{
 				
 				if (i == brandweerwagens_onroad[k].second->getLocatie().second && j == brandweerwagens_onroad[k].second->getLocatie().first)
 				{
-					lijn = lijn + "b" + " ";
+					lijn = lijn + "*" + " ";
 					found = true;
 				}
 			}
@@ -245,7 +255,7 @@ void Stad::printStad()
 
 				if (i == ambulances_onroad[k].second->getLocatie().second && j == ambulances_onroad[k].second->getLocatie().first)
 				{
-					lijn = lijn + "a" + " ";
+					lijn = lijn + "=" + " ";
 					found = true;
 				}
 				for (int k = 0; k < politiewagens_onroad.size(); k++)
@@ -253,7 +263,7 @@ void Stad::printStad()
 
 					if (i == politiewagens_onroad[k].second->getLocatie().second && j == politiewagens_onroad[k].second->getLocatie().first)
 					{
-						lijn = lijn + "p" + " ";
+						lijn = lijn + "%" + " ";
 						found = true;
 					}
 				}
@@ -266,6 +276,7 @@ void Stad::printStad()
 		}
 		output.writeToStatus( lijn );
 	}
+	output.writeToStatus("-=-=-=-=-=-=-=-=-=-=-=-");
 }
 bool Stad::checkBestemming(Stadsdeel* s, std::pair<int, int> p)
 {
@@ -1066,6 +1077,7 @@ void Stad::simulatie2()
 					output.writeToStatus("-=-=-=-=-=-=-=-=-=-=-=-");
 					output.writeToStatus("De brand is geblust en gaat nu naar de volgende opdracht");
 					output.writeToStatus("-=-=-=-=-=-=-=-=-=-=-=-");
+					brandweerwagens_onroad[i].first->setInBrand(false);
 					std::pair<int, int> t = brandweerwagens_onroad[i].second->getLocatie();
 					std::pair<int, int> locatie; locatie.first = t.second; locatie.second = t.first;
 					brandweerwagens_onroad[i].first = brandhuizen[0];
@@ -1086,10 +1098,10 @@ void Stad::simulatie2()
 							output.writeToStatus("-=-=-=-=-=-=-=-=-=-=-=-");
 							output.writeToStatus("De brand is geblust en gaat nu terug naar de kazerne");
 							output.writeToStatus("-=-=-=-=-=-=-=-=-=-=-=-");
+							brandweerwagens_onroad[i].first->setInBrand(false);
 							std::pair<int, int> t = brandweerwagens_onroad[i].second->getLocatie();
 							std::pair<int, int> locatie; locatie.first = t.second; locatie.second = t.first;
 
-							brandweerwagens_onroad[i].first->setBrandbaarheid(20);
 							brandweerwagens_onroad[i].second->setRichting(checkRichting(kazernes[j], locatie)); Stadsdeel::Richting r = brandweerwagens_onroad[i].second->getRichting();
 							brandweerwagens_onroad[i].first = kazernes[j];
 
@@ -1236,9 +1248,12 @@ void Stad::simulatie2()
 									{
 										if (dynamic_cast<Huis*>(t) != nullptr || dynamic_cast<Winkel*>(t) != nullptr)
 										{
-											brandhuizen.push_back(t);
-											ongevalhuizen.push_back(t);
-											amount--;
+											if (!(t->getInBrand()))
+											{
+												brandhuizen.push_back(t);
+												ongevalhuizen.push_back(t);
+												amount--;
+											}
 										}
 									}
 								}
@@ -1273,9 +1288,12 @@ void Stad::simulatie2()
 									{
 										if (dynamic_cast<Huis*>(t) != nullptr || dynamic_cast<Winkel*>(t) != nullptr)
 										{
-											brandhuizen.push_back(t);
-											ongevalhuizen.push_back(t);
-											amount--;
+											if (!(t->getInBrand()))
+											{
+												brandhuizen.push_back(t);
+												ongevalhuizen.push_back(t);
+												amount--;
+											}
 										}
 									}
 								}
@@ -1310,9 +1328,12 @@ void Stad::simulatie2()
 									{
 										if (dynamic_cast<Huis*>(t) != nullptr || dynamic_cast<Winkel*>(t) != nullptr)
 										{
-											brandhuizen.push_back(t);
-											ongevalhuizen.push_back(t);
-											amount--;
+											if (!(t->getInBrand()))
+											{
+												brandhuizen.push_back(t);
+												ongevalhuizen.push_back(t);
+												amount--;
+											}
 										}
 									}
 								}
@@ -1347,9 +1368,12 @@ void Stad::simulatie2()
 									{
 										if (dynamic_cast<Huis*>(t) != nullptr || dynamic_cast<Winkel*>(t) != nullptr)
 										{
-											brandhuizen.push_back(t);
-											ongevalhuizen.push_back(t);
-											amount--;
+											if (!(t->getInBrand()))
+											{
+												brandhuizen.push_back(t);
+												ongevalhuizen.push_back(t);
+												amount--;
+											}
 										}
 									}
 								}
@@ -1436,7 +1460,6 @@ void Stad::simulatie2()
 							std::pair<int, int> t = politiewagens_onroad[i].second->getLocatie();
 							std::pair<int, int> locatie; locatie.first = t.second; locatie.second = t.first;
 
-							politiewagens_onroad[i].first->setOvervalbaarheid(16);
 							politiewagens_onroad[i].second->setRichting(checkRichting(bureaus[j], locatie)); Stadsdeel::Richting r = politiewagens_onroad[i].second->getRichting();
 							politiewagens_onroad[i].first = bureaus[j];
 
@@ -1506,193 +1529,7 @@ void Stad::simulatie2()
 	}
 	
 }
-/*void Stad::simulatie()
-{
-	//std::pair<int,int> test; test.first = 4; test.second = 10;
 
-	printStad();
-	srand(time(NULL));
-	Stadsdeel* doel;
-	bool stopper = true; bool first = true; bool returning = false;
-	while (true)
-	{
-		int x = rand() % (yrow-1) + 1;
-		int y = rand() % (xrow-1) + 1;
-		std::pair<int, int> p; p.first = y; p.second = x;
-		doel = getStadsdeel(p);
-		if (doel->getType() == Stadsdeel::House)
-		{
-			std::pair<Stadsdeel*, Brandweerwagen*> huis;
-			huis.first = doel; huis.second = wagens[0];
-			brandhuizen.push_back(huis);
-			break;
-		}
-	}
-	std::vector<Richting> startrichting;
-	std::vector<Brandweerwagen*> onstandby;
-	std::vector<std::pair<Brandweerwagen*,Stadsdeel*>> onroad;
-	//Richting richting = checkRichting(doel, wagen);
-	while (stopper)
-	{
-		if (first)
-		{
-			for (int i = 0; i < wagens.size(); i++)
-			{
-				bool standby = true;
-				for (int j = 0; j < brandhuizen.size(); j++)
-				{
-					if (wagens[i] == brandhuizen[j].second)
-					{
-						standby = false;
-						std::pair<Brandweerwagen*, Stadsdeel*> t; t.first = wagens[i]; t.second = brandhuizen[j].first; //t.second = getStadsdeel(test);
-						onroad.push_back(t);
-						output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-						output.writeToStatus( "Huis op (y,x) coordinaat (" + brandhuizen[j].first->getLocatie().second + "," + brandhuizen[j].first->getLocatie().first + ") staat in brand." );
-						output.writeToStatus( "Brandweerwagen " + wagens[i]->getNaam() + " zal ernaar uitrukken" );
-						output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-						output.writeToStatus( std::endl;
-						std::pair<int, int> p = onroad[i].first->getLocatie();
-						std::pair<int, int> locatie; locatie.first = p.second; locatie.second = p.first;
-						Richting r = checkRichting(onroad[i].second, locatie);
-						startrichting.push_back(r);
-					}
-				} 
-				if (standby)
-				{
-					onstandby.push_back(wagens[i]);
-				}
-			} first = false;
-		}
-		for (int i = 0; i < onroad.size(); i++)
-		{
-			output.writeToStatus( "Statusupdate:" );
-			output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-			output.writeToStatus( "Brandweerwagens onderweg:" );
-			output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-			std::pair<int, int> t = onroad[i].first->getLocatie();
-			std::pair<int, int> locatie; locatie.first = t.second; locatie.second = t.first;
-			Stadsdeel* vak = getStadsdeel(locatie);
-			if (returning)
-			{
-				if (checkBestemming(onroad[i].second, locatie))
-				{
-					output.writeToStatus( onroad[i].first->getNaam() + " is weer terug in de kazerne (" + onroad[i].first->getBasis() + ")" );
-					output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-					//std::cout + "(" + locatie.first + "," + locatie.second + ") Terug op de kazerne" );
-					stopper = false;
-					break;
-				}
-			}
-			if (!checkBestemming(onroad[i].second, locatie))
-			{
-				if (vak->getType() != Stadsdeel::Crossroad)
-				{
-					output.writeToStatus( onroad[i].first->getNaam() + " op locatie (" + t.second + "," + t.first + ") in de " + vak->getNaam() );
-					output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-					if (startrichting[i] == Links)
-					{
-						locatie.second -= 1;
-						t; t.first = locatie.second; t.second = locatie.first;
-						onroad[i].first->setLocatie(t);
-					}
-					if (startrichting[i] == Rechts)
-					{
-						locatie.second += 1;
-						t; t.first = locatie.second; t.second = locatie.first;
-						onroad[i].first->setLocatie(t);
-					}
-					if (startrichting[i] == Onder)
-					{
-						locatie.first -= 1;
-						t; t.first = locatie.second; t.second = locatie.first;
-						onroad[i].first->setLocatie(t);
-					}
-					if (startrichting[i] == Boven)
-					{
-						locatie.first += 1;
-						t; t.first = locatie.second; t.second = locatie.first;
-						onroad[i].first->setLocatie(t);
-					}
-					
-				}
-				else
-				{
-					output.writeToStatus( onroad[i].first->getNaam() + " op kruispunt (" + t.second + "," + t.first + ") in de " + vak->getNaam() );
-					output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-					std::pair<int, int> p = onroad[i].first->getLocatie();
-					std::pair<int, int> locatie; locatie.first = p.second; locatie.second = p.first;
-					std::pair<int, int> t;
-					startrichting[i] = checkRichting(onroad[i].second, locatie);
-					if (startrichting[i] == Links)
-					{
-						locatie.second -= 1;
-						t.first = locatie.second; t.second = locatie.first;
-						onroad[i].first->setLocatie(t);
-					}
-					if (startrichting[i] == Rechts)
-					{
-						locatie.second += 1;
-						t.first = locatie.second; t.second = locatie.first;
-						onroad[i].first->setLocatie(t);
-					}
-					if (startrichting[i] == Onder)
-					{
-						locatie.first -= 1;
-						t.first = locatie.second; t.second = locatie.first;
-						onroad[i].first->setLocatie(t);
-					}
-					if (startrichting[i] == Boven)
-					{
-						locatie.first += 1;
-						t.first = locatie.second; t.second = locatie.first;
-						onroad[i].first->setLocatie(t);
-					}
-					
-				}
-				
-				//std::cout + t.second + "|" + t.first );
-			}
-			else
-			{
-				returning = true;
-				for (int j = 0; j < kazernes.size(); j++)
-				{
-					if (onroad[i].first->getBasis() == kazernes[j]->getNaam())
-					{
-						output.writeToStatus( onroad[i].first->getNaam() + " gearriveerd locatie (" + locatie.first + "," + locatie.second + ") en de brand is geblust" );
-						output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-						for (int k = 0; k < brandhuizen.size(); k++)
-						{
-							if (brandhuizen[k].second == wagens[i])
-							{
-								brandhuizen.pop_back();
-							}
-						}
-						onroad[i].second = kazernes[j];
-						returning = true;
-					}
-				}
-				startrichting[i] = checkRichting(onroad[i].second, locatie);
-			}
-		}
-		output.writeToStatus( "Huizen in brand:" );
-		output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-		for (int i = 0; i < onstandby.size(); i++)
-		{
-			output.writeToStatus( "Brandweerwagen " + onstandby[i]->getNaam() + " in kazerne (" + onstandby[i]->getBasis() + ")" );
-		}
-		output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-		output.writeToStatus( "Huizen in brand:" );
-		output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-		for (int i = 0; i < brandhuizen.size(); i++)
-		{
-			output.writeToStatus( "Huis op locatie (" + brandhuizen[i].first->getLocatie().second + "," + brandhuizen[i].first->getLocatie().first + ") staat nog in brand met " + brandhuizen[i].first->getBrandbaarheid() + " brandbaarheid over" );
-			brandhuizen[i].first->setBrandbaarheid(brandhuizen[i].first->getBrandbaarheid() - 1);
-		}
-		output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
-		output.writeToStatus( std::endl;
-	}
-} */
 std::pair<int, int> Stad::veranderLocatie(std::pair<int, int> l, Stadsdeel::Richting r)
 {
 	std::pair<int, int> t;
@@ -1930,6 +1767,10 @@ std::pair<int, int> Stadsdeel::getGrootte()
 	std::pair<int, int> t; t.first = 0; t.second = 0;
 	return t;
 }
+bool Stadsdeel::getInBrand()
+{
+	return false;
+}
 char Stadsdeel::getKarakter()
 {
 	return '0';
@@ -1941,6 +1782,10 @@ Stadsdeel::Type Stadsdeel::getType()
 std::string Stadsdeel::getNaam()
 {
 	return "";
+}
+void Stadsdeel::setInBrand(bool i)
+{
+	inBrand = i;
 }
 void Stadsdeel::setBrandbaarheid(int i)
 {
@@ -2346,6 +2191,14 @@ bool Huis::properlyInitialized()
 {
 	return _initCheck == this;
 }
+void Huis::setInBrand(bool i)
+{
+	inBrand = i;
+}
+bool Huis::getInBrand()
+{
+	return inBrand;
+}
 void Huis::setLocatie(std::pair<int, int> l)
 {
 	locatie = l;
@@ -2388,6 +2241,14 @@ Winkel::Winkel(void)
 bool Winkel::properlyInitialized()
 {
 	return _initCheck == this;
+}
+void Winkel::setInBrand(bool i)
+{
+	inBrand = i;
+}
+bool Winkel::getInBrand()
+{
+	return inBrand;
 }
 void Winkel::setLocatie(std::pair<int, int> l)
 {
@@ -2521,9 +2382,8 @@ void UI::showMenu()
 	std::cout << "(3) Huis in brand steken" << std::endl;
 	std::cout << "(4) Winkel laten overvallen" << std::endl;
 	std::cout << "(5) Aantal stappen in simulatie aanpassen" << std::endl;
-	std::cout << "(6) Simpele uitvoer laten uitvoeren" << std::endl;
-	std::cout << "(7) Simpele grafische impressie tonen" << std::endl;
-	std::cout << "(8) Simulatie starten" << std::endl;
+	std::cout << "(6) Simpele grafische impressie tonen" << std::endl;
+	std::cout << "(7) Simulatie starten" << std::endl;
 	std::cout << "(0) Sluit dit programma" << std::endl;
 	std::cout << "-----------------------------------" << std::endl;
 	std::cout << "Uw keuze: ";
@@ -2555,12 +2415,12 @@ void UI::showMenu()
 			setSteps();
 			break;
 		}
-		case 7:
+		case 6:
 		{
 			showMap();
 			break;
 		}
-		case 8:
+		case 7:
 		{
 			runSimulatie();
 			break;
@@ -2607,6 +2467,7 @@ void UI::startBrand()
 	{
 		stad->brandhuizen.push_back(stad->getStadsdeel(coord));
 		stad->ongevalhuizen.push_back(stad->getStadsdeel(coord));
+		stad->getStadsdeel(coord)->setInBrand(true);
 	}
 	std::cout << "-=-=-=-=-=-=-=-=-=-=-" << std::endl << std::endl;
 	showMenu();
