@@ -9,15 +9,15 @@
 /*
 CLASSE VOOR DE BASE
 */
-class Stadsdeel
+class Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Stadsdeel();
+	Vstadsdeel();
 	bool properlyInitialized();
-	enum Type { Station, Police, Hospital, Wagon, House, Store, Street, Crossroad, Policewagon, Ambulancewagon };
+	enum Type { Station, Police, Hospital, Wagon, House, Store, Street, Crossroad, Policewagon, Mambulancewagon };
 	enum Richting { Links, Rechts, Onder, Boven };
 	virtual bool getInBrand();
 	virtual std::pair<int, int> getLocatie();
@@ -32,26 +32,26 @@ public:
 	virtual char getKarakter();
 	virtual std::string getNaam();
 	virtual Type getType();
-	virtual std::string getEersteStraat();
-	virtual std::string getTweedeStraat();
+	virtual std::string getEersteMstraat();
+	virtual std::string getTweedeMstraat();
 private:
 	bool inBrand;
 	int brandbaarheid;
 	int overvalbaarheid;
-	Stadsdeel* _initCheck;
+	Vstadsdeel* _initCheck;
 
 };
 
 /*
-CLASSE VOOR DE BRANDWEERKAZERNE
+CLASSE VOOR DE Mbrandweerkazerne
 */
-class Brandweerkazerne : public Stadsdeel
+class Mbrandweerkazerne : public Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Brandweerkazerne();
+	Mbrandweerkazerne();
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setLocatie(std::pair<int, int>);
@@ -67,18 +67,18 @@ private:
 	std::pair<int, int> ingang;
 	char karakter = 'K';
 	Type type = Station;
-	Brandweerkazerne* _initCheck;
+	Mbrandweerkazerne* _initCheck;
 };
 /*
-CLASSE VOOR DE POLITIEBUREAU
+CLASSE VOOR DE Mpolitiebureau
 */
-class Politiebureau : public Stadsdeel
+class Mpolitiebureau : public Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Politiebureau();
+	Mpolitiebureau();
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setLocatie(std::pair<int, int>);
@@ -97,18 +97,18 @@ private:
 	std::pair<int, int> grootte;
 	char karakter = 'P';
 	Type type = Police;
-	Politiebureau* _initCheck;
+	Mpolitiebureau* _initCheck;
 };
 /*
-CLASSE VOOR DE ZIEKENHUIS
+CLASSE VOOR DE MziekenMhuis
 */
-class Ziekenhuis : public Stadsdeel
+class MziekenMhuis : public Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Ziekenhuis();
+	MziekenMhuis();
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setLocatie(std::pair<int, int>);
@@ -127,102 +127,102 @@ private:
 	std::pair<int, int> grootte;
 	char karakter = 'Z';
 	Type type = Hospital;
-	Ziekenhuis* _initCheck;
+	MziekenMhuis* _initCheck;
 };
 /*
-CLASSE VOOR DE BRANDWEERWAGEN
+CLASSE VOOR DE Mbrandweerwagen
 */
-class Brandweerwagen : Stadsdeel
+class Mbrandweerwagen : Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Brandweerwagen();
+	Mbrandweerwagen();
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setBasis(std::string);
 	void setLocatie(std::pair<int, int>);
-	void setRichting(Stadsdeel::Richting);
+	void setRichting(Vstadsdeel::Richting);
 	std::pair<int, int> getLocatie();
-	Stadsdeel::Richting getRichting();
+	Vstadsdeel::Richting getRichting();
 	std::string getBasis();
 	std::string getNaam();
 	char getKarakter();
-	Stadsdeel::Type getType();
+	Vstadsdeel::Type getType();
 private:
 	std::string naam;
 	std::string basis;
 	std::pair<int, int> locatie;
 	char karakter = 'B';
-	Stadsdeel::Type type = Stadsdeel::Wagon;
-	Stadsdeel::Richting richting;
-	Brandweerwagen* _initCheck;
+	Vstadsdeel::Type type = Vstadsdeel::Wagon;
+	Vstadsdeel::Richting richting;
+	Mbrandweerwagen* _initCheck;
 };
-class Politiewagen : Stadsdeel
+class Mpolitiewagen : Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Politiewagen();
+	Mpolitiewagen();
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setBasis(std::string);
 	void setLocatie(std::pair<int, int>);
-	void setRichting(Stadsdeel::Richting);
+	void setRichting(Vstadsdeel::Richting);
 	std::pair<int, int> getLocatie();
-	Stadsdeel::Richting getRichting();
+	Vstadsdeel::Richting getRichting();
 	std::string getBasis();
 	std::string getNaam();
 	char getKarakter();
-	Stadsdeel::Type getType();
+	Vstadsdeel::Type getType();
 private:
 	std::string naam;
 	std::string basis;
 	std::pair<int, int> locatie;
 	char karakter = 'B';
-	Stadsdeel::Type type = Stadsdeel::Policewagon;
-	Stadsdeel::Richting richting;
-	Politiewagen* _initCheck;
+	Vstadsdeel::Type type = Vstadsdeel::Policewagon;
+	Vstadsdeel::Richting richting;
+	Mpolitiewagen* _initCheck;
 };
-class Ambulance : Stadsdeel
+class Mambulance : Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Ambulance();
+	Mambulance();
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setBasis(std::string);
 	void setLocatie(std::pair<int, int>);
-	void setRichting(Stadsdeel::Richting);
+	void setRichting(Vstadsdeel::Richting);
 	std::pair<int, int> getLocatie();
-	Stadsdeel::Richting getRichting();
+	Vstadsdeel::Richting getRichting();
 	std::string getBasis();
 	std::string getNaam();
 	char getKarakter();
-	Stadsdeel::Type getType();
+	Vstadsdeel::Type getType();
 private:
 	std::string naam;
 	std::string basis;
 	std::pair<int, int> locatie;
-	Stadsdeel::Richting richting;
+	Vstadsdeel::Richting richting;
 	char karakter = 'B';
-	Stadsdeel::Type type = Stadsdeel::Ambulancewagon;
-	Ambulance* _initCheck;
+	Vstadsdeel::Type type = Vstadsdeel::Mambulancewagon;
+	Mambulance* _initCheck;
 };
 /*
-CLASSE VOOR DE STRAAT
+CLASSE VOOR DE Mstraat
 */
-class Straat : public Stadsdeel
+class Mstraat : public Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Straat();
+	Mstraat();
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setBegin(std::pair<int, int>);
@@ -238,19 +238,19 @@ private:
 	std::pair<int, int> einde;
 	char karakter = ' ';
 	Type type = Street;
-	Straat* _initCheck;
+	Mstraat* _initCheck;
 };
 
 /*
-CLASSE VOOR EEN HUIS
+CLASSE VOOR EEN Mhuis
 */
-class Huis : public Stadsdeel
+class Mhuis : public Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Huis();
+	Mhuis();
 	bool properlyInitialized();
 	bool getInBrand();
 	void setInBrand(bool);
@@ -266,18 +266,18 @@ private:
 	int brandbaarheid;
 	char karakter = 'H';
 	Type type = House;
-	Huis* _initCheck;
+	Mhuis* _initCheck;
 };
 /*
-CLASSE VOOR EEN WINKEL
+CLASSE VOOR EEN Mwinkel
 */
-class Winkel : public Stadsdeel
+class Mwinkel : public Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Winkel();
+	Mwinkel();
 	bool properlyInitialized();
 	bool getInBrand();
 	void setInBrand(bool);
@@ -298,34 +298,34 @@ private:
 	int brandbaarheid; int overvalbaarheid;
 	char karakter = 'W';
 	Type type = Store;
-	Winkel* _initCheck;
+	Mwinkel* _initCheck;
 };
 /*
-CLASSE VOOR EEN KRUISPUNT
+CLASSE VOOR EEN Mkruispunt
 */
-class Kruispunt : public Stadsdeel
+class Mkruispunt : public Vstadsdeel
 {
 public:
 	/**
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
-	Kruispunt();
-	void setEersteStraat(std::string);
-	void setTweedeStraat(std::string);
+	Mkruispunt();
+	void setEersteMstraat(std::string);
+	void setTweedeMstraat(std::string);
 	void setLocatie(std::pair<int, int>);
-	std::string getEersteStraat();
-	std::string getTweedeStraat();
+	std::string getEersteMstraat();
+	std::string getTweedeMstraat();
 	std::string getNaam();
 	char getKarakter();
 	Type getType();
 	bool properlyInitialized();
 private:
-	std::string eersteStraat = "";
-	std::string tweedeStraat = "";
+	std::string eersteMstraat = "";
+	std::string tweedeMstraat = "";
 	std::pair<int, int> locatie;
 	char karakter = ' ';
 	Type type = Crossroad;
-	Kruispunt* _initCheck;
+	Mkruispunt* _initCheck;
 };
 
 
@@ -340,50 +340,50 @@ public:
 	\n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 	*/
 	
-	enum StraatType { Horizontaal, Verticaal, Geen };
+	enum MstraatType { Horizontaal, Verticaal, Geen };
 
-	void setStadsdeel(Stadsdeel &);
-	Stadsdeel* getStadsdeel(std::pair<int, int>);
+	void setVstadsdeel(Vstadsdeel &);
+	Vstadsdeel* getVstadsdeel(std::pair<int, int>);
 
-	bool checkAangrenzing(Stadsdeel*);
+	bool checkAangrenzing(Vstadsdeel*);
 
-	bool checkBestemming(Stadsdeel*, std::pair<int, int>);
-	StraatType checkStraat(Stadsdeel*, std::pair<int, int>);
-	Stadsdeel::Richting checkRichting(Stadsdeel*, std::pair<int, int>);
-	std::pair<int, int> veranderLocatie(std::pair<int, int>, Stadsdeel::Richting);
+	bool checkBestemming(Vstadsdeel*, std::pair<int, int>);
+	MstraatType checkMstraat(Vstadsdeel*, std::pair<int, int>);
+	Vstadsdeel::Richting checkRichting(Vstadsdeel*, std::pair<int, int>);
+	std::pair<int, int> veranderLocatie(std::pair<int, int>, Vstadsdeel::Richting);
 
 	
 	void simulatie();
 	void simulatie2();
 
-	std::vector<Brandweerkazerne*> kazernes;
-	std::vector<Politiebureau*> bureaus;
-	std::vector<Ziekenhuis*> ziekenhuizen;
+	std::vector<Mbrandweerkazerne*> kazernes;
+	std::vector<Mpolitiebureau*> bureaus;
+	std::vector<MziekenMhuis*> ziekenhuizen;
 
-	std::vector<Brandweerwagen*> brandweerwagens;
-	std::vector<std::pair<Stadsdeel*,Brandweerwagen*>> brandweerwagens_onroad;
-	std::vector<Brandweerwagen*> brandweerwagens_onstandby;
+	std::vector<Mbrandweerwagen*> Mbrandweerwagens;
+	std::vector<std::pair<Vstadsdeel*,Mbrandweerwagen*>> Mbrandweerwagens_onroad;
+	std::vector<Mbrandweerwagen*> Mbrandweerwagens_onstandby;
 
-	std::vector<Politiewagen*> politiewagens;
-	std::vector<std::pair<Stadsdeel*, Politiewagen*>> politiewagens_onroad;
-	std::vector<Politiewagen*> politiewagens_onstandby;
+	std::vector<Mpolitiewagen*> Mpolitiewagens;
+	std::vector<std::pair<Vstadsdeel*, Mpolitiewagen*>> Mpolitiewagens_onroad;
+	std::vector<Mpolitiewagen*> Mpolitiewagens_onstandby;
 
-	std::vector<Ambulance*> ambulances;
-	std::vector<std::pair<Stadsdeel*, Ambulance*>> ambulances_onroad;
-	std::vector<Ambulance*> ambulances_onstandby;
+	std::vector<Mambulance*> Mambulances;
+	std::vector<std::pair<Vstadsdeel*, Mambulance*>> Mambulances_onroad;
+	std::vector<Mambulance*> Mambulances_onstandby;
 
-	std::vector<Stadsdeel*> brandhuizen;
-	std::vector<Stadsdeel*> overvalhuizen;
-	std::vector<Stadsdeel*> ongevalhuizen;
+	std::vector<Vstadsdeel*> brandhuizen;
+	std::vector<Vstadsdeel*> overvalhuizen;
+	std::vector<Vstadsdeel*> ongevalhuizen;
 	
 	std::pair<int, int> getGebouwCoord(int);//
-	std::pair<std::pair<int, int>, std::pair<int, int>> getStraatCoord(int);//
+	std::pair<std::pair<int, int>, std::pair<int, int>> getMstraatCoord(int);//
 
 	void addGebouwCoord(std::pair<int, int>);//
-	void addStraatCoord(std::pair<std::pair<int, int>, std::pair<int, int>>);//
+	void addMstraatCoord(std::pair<std::pair<int, int>, std::pair<int, int>>);//
 
 	int getGebouwCoordsLength();//
-	int getStraatCoordsLength();//
+	int getMstraatCoordsLength();//
 
 	bool checkStad();//
 	void printStad();
@@ -395,11 +395,11 @@ protected:
 	static const int yrow = 22;
 private:
 	Stad* _initCheck;
-	Stadsdeel* grid[xrow][yrow];
+	Vstadsdeel* grid[xrow][yrow];
 	std::ofstream* status;
 	std::ofstream* console;
 	std::vector<std::pair<int, int>> gebouwCoords;
-	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> straatCoords;
+	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> MstraatCoords;
 };
 class OutputClass
 {
@@ -431,7 +431,7 @@ public:
 	void startBrand();
 	void startOverval();
 	void runSimulatie();
-	bool startBrandweerwagen();
+	bool startMbrandweerwagen();
 	bool getSU();
 	void showMap();
 	UI();
