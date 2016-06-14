@@ -194,7 +194,9 @@ public:
 	void setNaam(std::string);
 	void setBasis(std::string);
 	void setLocatie(std::pair<int, int>);
+	void setRichting(Stadsdeel::Richting);
 	std::pair<int, int> getLocatie();
+	Stadsdeel::Richting getRichting();
 	std::string getBasis();
 	std::string getNaam();
 	char getKarakter();
@@ -203,6 +205,7 @@ private:
 	std::string naam;
 	std::string basis;
 	std::pair<int, int> locatie;
+	Stadsdeel::Richting richting;
 	char karakter = 'B';
 	Stadsdeel::Type type = Stadsdeel::Ambulancewagon;
 	Ambulance* _initCheck;
@@ -362,6 +365,7 @@ public:
 
 	std::vector<Stadsdeel*> brandhuizen;
 	std::vector<Stadsdeel*> overvalhuizen;
+	std::vector<Stadsdeel*> ongevalhuizen;
 	
 	std::pair<int, int> getGebouwCoord(int);//
 	std::pair<std::pair<int, int>, std::pair<int, int>> getStraatCoord(int);//
@@ -416,6 +420,7 @@ public:
 	void leesBestandStad();
 	void leesBestandVoertuigen();
 	void startBrand();
+	void startOverval();
 	void runSimulatie();
 	bool startBrandweerwagen();
 	bool getSU();
