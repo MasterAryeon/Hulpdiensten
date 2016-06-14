@@ -5,22 +5,7 @@
 #include <string>
 #include <vector>
 
-class Location
-{
-public: 
-	Location();
-	Location(int,int);
-	bool properlyInitialized();
-	int getX();
-	int getY();
-	void setX(int);
-	void setY(int);
 
-private:
-	int X = 0;
-	int Y = 0;
-	Location* _initCheck;
-};
 /*
 CLASSE VOOR DE BASE
 */
@@ -35,10 +20,10 @@ public:
 	enum Type { Station, Police, Hospital, Wagon, House, Store, Street, Crossroad, Policewagon, Mambulancewagon };
 	enum Richting { Links, Rechts, Onder, Boven };
 	virtual bool getInBrand();
-	virtual Location getLocatie();
-	virtual Location getBegin();
-	virtual Location getEinde();
-	virtual Location getGrootte();
+	virtual std::pair<int, int> getLocatie();
+	virtual std::pair<int, int> getBegin();
+	virtual std::pair<int, int> getEinde();
+	virtual std::pair<int, int> getGrootte();
 	virtual int getBrandbaarheid();
 	virtual int getOvervalbaarheid();
 	virtual void setInBrand(bool);
@@ -69,17 +54,17 @@ public:
 	Mbrandweerkazerne();
 	bool properlyInitialized();
 	void setNaam(std::string);
-	void setLocatie(Location);
-	void setIngang(Location);
-	Location getLocatie();
-	Location getIngang();
+	void setLocatie(std::pair<int, int>);
+	void setIngang(std::pair<int, int>);
+	std::pair<int, int> getLocatie();
+	std::pair<int, int> getIngang();
 	char getKarakter();
 	std::string getNaam();
 	Type getType();
 private:
 	std::string naam;
-	Location locatie;
-	Location ingang;
+	std::pair<int, int> locatie;
+	std::pair<int, int> ingang;
 	char karakter = 'K';
 	Type type = Station;
 	Mbrandweerkazerne* _initCheck;
@@ -96,20 +81,20 @@ public:
 	Mpolitiebureau();
 	bool properlyInitialized();
 	void setNaam(std::string);
-	void setLocatie(Location);
-	void setIngang(Location);
-	void setGrootte(Location);
-	Location getLocatie();
-	Location getIngang();
-	Location getGrootte();
+	void setLocatie(std::pair<int, int>);
+	void setIngang(std::pair<int, int>);
+	void setGrootte(std::pair<int, int>);
+	std::pair<int, int> getLocatie();
+	std::pair<int, int> getIngang();
+	std::pair<int, int> getGrootte();
 	char getKarakter();
 	std::string getNaam();
 	Type getType();
 private:
 	std::string naam;
-	Location locatie;
-	Location ingang;
-	Location grootte;
+	std::pair<int, int> locatie;
+	std::pair<int, int> ingang;
+	std::pair<int, int> grootte;
 	char karakter = 'P';
 	Type type = Police;
 	Mpolitiebureau* _initCheck;
@@ -126,20 +111,20 @@ public:
 	MziekenMhuis();
 	bool properlyInitialized();
 	void setNaam(std::string);
-	void setLocatie(Location);
-	void setIngang(Location);
-	void setGrootte(Location);
-	Location getLocatie();
-	Location getIngang();
-	Location getGrootte();
+	void setLocatie(std::pair<int, int>);
+	void setIngang(std::pair<int, int>);
+	void setGrootte(std::pair<int, int>);
+	std::pair<int, int> getLocatie();
+	std::pair<int, int> getIngang();
+	std::pair<int, int> getGrootte();
 	char getKarakter();
 	std::string getNaam();
 	Type getType();
 private:
 	std::string naam;
-	Location locatie;
-	Location ingang;
-	Location grootte;
+	std::pair<int, int> locatie;
+	std::pair<int, int> ingang;
+	std::pair<int, int> grootte;
 	char karakter = 'Z';
 	Type type = Hospital;
 	MziekenMhuis* _initCheck;
@@ -157,9 +142,9 @@ public:
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setBasis(std::string);
-	void setLocatie(Location);
+	void setLocatie(std::pair<int, int>);
 	void setRichting(Vstadsdeel::Richting);
-	Location getLocatie();
+	std::pair<int, int> getLocatie();
 	Vstadsdeel::Richting getRichting();
 	std::string getBasis();
 	std::string getNaam();
@@ -168,7 +153,7 @@ public:
 private:
 	std::string naam;
 	std::string basis;
-	Location locatie;
+	std::pair<int, int> locatie;
 	char karakter = 'B';
 	Vstadsdeel::Type type = Vstadsdeel::Wagon;
 	Vstadsdeel::Richting richting;
@@ -184,9 +169,9 @@ public:
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setBasis(std::string);
-	void setLocatie(Location);
+	void setLocatie(std::pair<int, int>);
 	void setRichting(Vstadsdeel::Richting);
-	Location getLocatie();
+	std::pair<int, int> getLocatie();
 	Vstadsdeel::Richting getRichting();
 	std::string getBasis();
 	std::string getNaam();
@@ -195,7 +180,7 @@ public:
 private:
 	std::string naam;
 	std::string basis;
-	Location locatie;
+	std::pair<int, int> locatie;
 	char karakter = 'B';
 	Vstadsdeel::Type type = Vstadsdeel::Policewagon;
 	Vstadsdeel::Richting richting;
@@ -211,9 +196,9 @@ public:
 	bool properlyInitialized();
 	void setNaam(std::string);
 	void setBasis(std::string);
-	void setLocatie(Location);
+	void setLocatie(std::pair<int, int>);
 	void setRichting(Vstadsdeel::Richting);
-	Location getLocatie();
+	std::pair<int, int> getLocatie();
 	Vstadsdeel::Richting getRichting();
 	std::string getBasis();
 	std::string getNaam();
@@ -222,7 +207,7 @@ public:
 private:
 	std::string naam;
 	std::string basis;
-	Location locatie;
+	std::pair<int, int> locatie;
 	Vstadsdeel::Richting richting;
 	char karakter = 'B';
 	Vstadsdeel::Type type = Vstadsdeel::Mambulancewagon;
@@ -240,17 +225,17 @@ public:
 	Mstraat();
 	bool properlyInitialized();
 	void setNaam(std::string);
-	void setBegin(Location);
-	void setEinde(Location);
+	void setBegin(std::pair<int, int>);
+	void setEinde(std::pair<int, int>);
 	std::string getNaam();
-	Location getBegin();
-	Location getEinde();
+	std::pair<int, int> getBegin();
+	std::pair<int, int> getEinde();
 	char getKarakter();
 	Type getType();
 private:
 	std::string naam;
-	Location begin;
-	Location einde;
+	std::pair<int, int> begin;
+	std::pair<int, int> einde;
 	char karakter = ' ';
 	Type type = Street;
 	Mstraat* _initCheck;
@@ -269,14 +254,14 @@ public:
 	bool properlyInitialized();
 	bool getInBrand();
 	void setInBrand(bool);
-	void setLocatie(Location);
+	void setLocatie(std::pair<int, int>);
 	int getBrandbaarheid();
 	void setBrandbaarheid(int);
-	Location getLocatie();
+	std::pair<int, int> getLocatie();
 	char getKarakter();
 	Type getType();
 private:
-	Location locatie;
+	std::pair<int, int> locatie;
 	bool inBrand;
 	int brandbaarheid;
 	char karakter = 'H';
@@ -296,19 +281,19 @@ public:
 	bool properlyInitialized();
 	bool getInBrand();
 	void setInBrand(bool);
-	void setLocatie(Location);
+	void setLocatie(std::pair<int, int>);
 	int getBrandbaarheid();
 	int getOvervalbaarheid();
 	void setBrandbaarheid(int);
 	void setOvervalbaarheid(int);
-	void setGrootte(Location);
-	Location getLocatie();
-	Location getGrootte();
+	void setGrootte(std::pair<int, int>);
+	std::pair<int, int> getLocatie();
+	std::pair<int, int> getGrootte();
 	char getKarakter();
 	Type getType();
 private:
-	Location locatie;
-	Location grootte;
+	std::pair<int, int> locatie;
+	std::pair<int, int> grootte;
 	bool inBrand;
 	int brandbaarheid; int overvalbaarheid;
 	char karakter = 'W';
@@ -327,7 +312,7 @@ public:
 	Mkruispunt();
 	void setEersteMstraat(std::string);
 	void setTweedeMstraat(std::string);
-	void setLocatie(Location);
+	void setLocatie(std::pair<int, int>);
 	std::string getEersteMstraat();
 	std::string getTweedeMstraat();
 	std::string getNaam();
@@ -337,7 +322,7 @@ public:
 private:
 	std::string eersteMstraat = "";
 	std::string tweedeMstraat = "";
-	Location locatie;
+	std::pair<int, int> locatie;
 	char karakter = ' ';
 	Type type = Crossroad;
 	Mkruispunt* _initCheck;
@@ -358,14 +343,14 @@ public:
 	enum MstraatType { Horizontaal, Verticaal, Geen };
 
 	void setVstadsdeel(Vstadsdeel &);
-	Vstadsdeel* getVstadsdeel(Location);
+	Vstadsdeel* getVstadsdeel(std::pair<int, int>);
 
 	bool checkAangrenzing(Vstadsdeel*);
 
-	bool checkBestemming(Vstadsdeel*, Location);
-	MstraatType checkMstraat(Vstadsdeel*, Location);
-	Vstadsdeel::Richting checkRichting(Vstadsdeel*, Location);
-	Location veranderLocatie(Location, Vstadsdeel::Richting);
+	bool checkBestemming(Vstadsdeel*, std::pair<int, int>);
+	MstraatType checkMstraat(Vstadsdeel*, std::pair<int, int>);
+	Vstadsdeel::Richting checkRichting(Vstadsdeel*, std::pair<int, int>);
+	std::pair<int, int> veranderLocatie(std::pair<int, int>, Vstadsdeel::Richting);
 
 	
 	void simulatie();
@@ -391,11 +376,11 @@ public:
 	std::vector<Vstadsdeel*> overvalhuizen;
 	std::vector<Vstadsdeel*> ongevalhuizen;
 	
-	Location getGebouwCoord(int);//
-	std::pair<Location, Location> getMstraatCoord(int);//
+	std::pair<int, int> getGebouwCoord(int);//
+	std::pair<std::pair<int, int>, std::pair<int, int>> getMstraatCoord(int);//
 
-	void addGebouwCoord(Location);//
-	void addMstraatCoord(std::pair<Location, Location>);//
+	void addGebouwCoord(std::pair<int, int>);//
+	void addMstraatCoord(std::pair<std::pair<int, int>, std::pair<int, int>>);//
 
 	int getGebouwCoordsLength();//
 	int getMstraatCoordsLength();//
@@ -406,15 +391,15 @@ public:
 	Stad();
 	bool properlyInitialized();
 protected:
-	static const int xrow = 22;
-	static const int yrow = 16;
+	static const int xrow = 16;
+	static const int yrow = 22;
 private:
 	Stad* _initCheck;
-	Vstadsdeel* grid[yrow][xrow];
+	Vstadsdeel* grid[xrow][yrow];
 	std::ofstream* status;
 	std::ofstream* console;
-	std::vector<Location> gebouwCoords;
-	std::vector<std::pair<Location, Location>> MstraatCoords;
+	std::vector<std::pair<int, int>> gebouwCoords;
+	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> MstraatCoords;
 };
 class OutputClass
 {
