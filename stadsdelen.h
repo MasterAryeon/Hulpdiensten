@@ -420,6 +420,7 @@ class OutputClass
 {
 public:
 	OutputClass();
+    bool properlyInitialized();
 	void writeToConsole(std::string);
 	void writeToConsole();
 	void writeToStatus(std::string);
@@ -449,6 +450,7 @@ public:
 	bool startMbrandweerwagen();
 	bool getSU();
 	void showMap();
+    bool properlyInitialized();
 	UI();
 
 private:

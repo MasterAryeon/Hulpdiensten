@@ -24,29 +24,41 @@ UI ui;
 
 Location::Location()
 {
-
+    _initCheck = this;
+    //ENSURE(properlyInitialized(), "Constructor must end in properlyInitialized state");
 }
 Location::Location(int x, int y)
 {
+     _initCheck = this;
 	X = x;
 	Y = y;
+    //ENSURE(properlyInitialized(), "Constructor must end in properlyInitialized state");
 }
 
 int Location::getX()
 {
+ //REQUIRE(this->properlyInitialized(), "Location wasn't initialized when calling getX");   
 	return X;
 }
 int Location::getY()
 {
+    //REQUIRE(this->properlyInitialized(), "Location wasn't initialized when calling GetY");
 	return Y;
 }
 void Location::setX(int x)
 {
+    //REQUIRE(this->properlyInitialized(), "Location wasn't initialized when calling setX");
 	X = x;
 }
 void Location::setY(int y)
 {
+    //REQUIRE(this->properlyInitialized(), "Location wasn't initialized when calling setY");
 	Y = y;
+}
+
+bool Location::properlyInitialized()
+{
+	return _initCheck == this;
 }
 /*
 	METHODES VOOR DE STAD
@@ -76,7 +88,7 @@ bool Stad::properlyInitialized()
 }
 void Stad::setVstadsdeel(Vstadsdeel &s)
 {
-	//REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling stVstadsdeel");
+	//REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling setVstadsdeel");
 	if ((dynamic_cast<Mbrandweerkazerne*>(&s)) != nullptr) {
 		Location l = s.getLocatie();
 		for (int i = l.getY(); i > (l.getY() - 4); i--) {
@@ -166,7 +178,7 @@ void Stad::setVstadsdeel(Vstadsdeel &s)
 }
 Vstadsdeel* Stad::getVstadsdeel(Location p)
 {
-	//REQUIRE(this->properlyInitialized(), "Vstadsdeel not properly initialized");
+	//REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling getVstadsdeel");
 	if ((p.getX() >= 0 && p.getX() <= xrow) && (p.getY() >= 0 && p.getY() <= yrow)) {
 		return grid[p.getY()][p.getX()];
 	}
@@ -177,7 +189,7 @@ Vstadsdeel* Stad::getVstadsdeel(Location p)
 
 bool Stad::checkAangrenzing(Vstadsdeel* s)
 {
-	//REQUIRE(this->properlyInitialized(), "Stad not properly initialized");
+	//REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling checkAangrenzing");
 	int aantal = 0;
 	if ((dynamic_cast<Mpolitiebureau*>(s)) != nullptr) {
 		aantal = 4;
@@ -201,6 +213,7 @@ bool Stad::checkAangrenzing(Vstadsdeel* s)
 }
 void Stad::printStad()
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling printStad");
 	Vstadsdeel* vak;
 	output.writeToStatus( "Legenda:" );
 	output.writeToStatus( "-=-=-=-=-=-=-=-=-=-=-=-" );
@@ -259,6 +272,7 @@ void Stad::printStad()
 }
 bool Stad::checkBestemming(Vstadsdeel* s, Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling checkBestemming");
 	Vstadsdeel* temp;
 	Location coordinaat;
 	// RECHTS
@@ -293,6 +307,7 @@ bool Stad::checkBestemming(Vstadsdeel* s, Location p)
 }
 Stad::MstraatType Stad::checkMstraat(Vstadsdeel* s, Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling checkMstraat");
 	Vstadsdeel* vak = getVstadsdeel(p);
 	Location locatie = s->getLocatie();
 	if ((dynamic_cast<Mstraat*>(vak)) != nullptr) {
@@ -325,6 +340,7 @@ Stad::MstraatType Stad::checkMstraat(Vstadsdeel* s, Location p)
 }
 Vstadsdeel::Richting Stad::checkRichting(Vstadsdeel* s, Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling checkRichting");
 	Vstadsdeel* vak = getVstadsdeel(p);
 	Location locatie = s->getLocatie();
 	if ((dynamic_cast<Mstraat*>(vak)) != nullptr) {
@@ -517,6 +533,7 @@ Vstadsdeel::Richting Stad::checkRichting(Vstadsdeel* s, Location p)
 
 bool Stad::stadInlezen(const char* s)
 {	
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling stadInlezen");
 	TiXmlDocument doc;
 	TiXmlElement* root;
 	if (!doc.LoadFile(s)) {
@@ -817,6 +834,7 @@ bool Stad::stadInlezen(const char* s)
 }
 void Stad::simulatie2()
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling simulatie2()");
 	srand(time(NULL));
 	int ib = brandhuizen.size(); int iw = Mbrandweerwagens_onstandby.size();
 	std::vector<int> toRemoveBrandweer; std::vector<int> toRemovePolitie; std::vector<int> toRemoveMambulance;
@@ -1270,6 +1288,7 @@ void Stad::simulatie2()
 
 Location Stad::veranderLocatie(Location l, Vstadsdeel::Richting r)
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling veranderLocatie");
 	Location t;
 	if (r == Vstadsdeel::Links) {
 		t.setX(l.getX() - 1);
@@ -1291,6 +1310,7 @@ Location Stad::veranderLocatie(Location l, Vstadsdeel::Richting r)
 }
 bool Stad::checkStad()
 {   
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling checkStad");
 	bool success = true;
 	for (int i = 0; i < yrow; i++) {	
 		for (int j = 0; j < xrow; j++) {
@@ -1416,26 +1436,32 @@ bool Stad::checkStad()
 }
 Location Stad::getGebouwCoord(int i)
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling getGebouwCoord");
 	return gebouwCoords[i];
 }
 std::pair<Location, Location> Stad::getMstraatCoord(int i)
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling getMstraatCoord");
 	return MstraatCoords[i];
 }
 void Stad::addGebouwCoord(Location g)
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling addGebouwCoord");
 	gebouwCoords.push_back(g);
 }
 void Stad::addMstraatCoord(std::pair<Location, Location> s)
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling addMstraatCoord");
 	MstraatCoords.push_back(s);
 }
 int Stad::getGebouwCoordsLength()
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling getGebouwCoordsLength");
 	return gebouwCoords.size();
 }
 int Stad::getMstraatCoordsLength()
 {
+    //REQUIRE(this->properlyInitialized(), "Stad wasn't initialized when calling getMstraatCoordsLength");
 	return MstraatCoords.size();
 }
 
@@ -1454,67 +1480,83 @@ bool Vstadsdeel::properlyInitialized()
 }
 Location Vstadsdeel::getLocatie()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getLocatie");
 	Location t = Location(0, 0);
 	return t;
 }
 Location Vstadsdeel::getBegin()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getBegin");
 	Location t = Location(0, 0);
 	return t;
 }
 Location Vstadsdeel::getEinde()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getEinde");
 	Location t = Location(0, 0);
 	return t;
 }
 Location Vstadsdeel::getGrootte()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getGrootte");
 	Location t = Location(0, 0);
 	return t;
 }
 bool Vstadsdeel::getInBrand()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getInBrand");
 	return false;
 }
 char Vstadsdeel::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getKarakter");
 	return '0';
 }
 Vstadsdeel::Type Vstadsdeel::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getType");
 	return Station;
 }
 std::string Vstadsdeel::getNaam()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getNaam");
 	return "";
 }
 void Vstadsdeel::setInBrand(bool i)
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling setInBrand");
+    
 	inBrand = i;
 }
 void Vstadsdeel::setBrandbaarheid(int i)
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling setBrandbaarheid");
 	brandbaarheid = 0;
 }
 void Vstadsdeel::setOvervalbaarheid(int i)
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling setOvervalbaarheid");
 	overvalbaarheid = 0;
 }
 int Vstadsdeel::getBrandbaarheid()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getBrandbaarheid");
 	return brandbaarheid;
 }
 int Vstadsdeel::getOvervalbaarheid()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getOvervalbaarheid");
 	return overvalbaarheid;
 }
 std::string Vstadsdeel::getEersteMstraat()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getEersteMstraat");
 	return "";
 }
 
 std::string Vstadsdeel::getTweedeMstraat()
 {
+    //REQUIRE(this->properlyInitialized(), "Vstadsdeel wasn't initialized when calling getTweedeMstraat");
 	return "";
 }
 
@@ -1535,34 +1577,42 @@ bool Mbrandweerkazerne::properlyInitialized()
 }
 void Mbrandweerkazerne::setNaam(std::string s)
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerkazerne wasn't initialized when calling setNaam");
 	naam = s;
 }
 void Mbrandweerkazerne::setLocatie(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerkazerne wasn't initialized when calling setLocatie");
 	locatie = p;
 }
 void Mbrandweerkazerne::setIngang(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerkazerne wasn't initialized when calling setIngang");
 	ingang = p;
 }
 Location Mbrandweerkazerne::getLocatie()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerkazerne wasn't initialized when calling getLocatie");
 	return locatie;
 }
 Location Mbrandweerkazerne::getIngang()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerkazerne wasn't initialized when calling getIngang");
 	return ingang;
 }
 std::string Mbrandweerkazerne::getNaam()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerkazerne wasn't initialized when calling getNaam");
 	return naam;
 }
 char Mbrandweerkazerne::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerkazerne wasn't initialized when calling getKarakter");
 	return karakter;
 }
 Vstadsdeel::Type Mbrandweerkazerne::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerkazerne wasn't initialized when calling getType");
 	return type;
 }
 
@@ -1580,42 +1630,52 @@ bool Mpolitiebureau::properlyInitialized()
 }
 void Mpolitiebureau::setNaam(std::string s)
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling setNaam");
 	naam = s;
 }
 void Mpolitiebureau::setLocatie(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling setLocatie");
 	locatie = p;
 }
 void Mpolitiebureau::setIngang(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling setIngang");
 	ingang = p;
 }
 void Mpolitiebureau::setGrootte(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling setGrootte");
 	grootte = p;
 }
 Location Mpolitiebureau::getLocatie()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling getLocatie");
 	return locatie;
 }
 Location Mpolitiebureau::getIngang()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling getIngang");
 	return ingang;
 }
 Location Mpolitiebureau::getGrootte()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling getGrootte");
 	return grootte;
 }
 std::string Mpolitiebureau::getNaam()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling getNaam");
 	return naam;
 }
 char Mpolitiebureau::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling getKarakter");
 	return karakter;
 }
 Vstadsdeel::Type Mpolitiebureau::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiebureau wasn't initialized when calling getType");
 	return type;
 }
 
@@ -1633,42 +1693,52 @@ bool MziekenMhuis::properlyInitialized()
 }
 void MziekenMhuis::setNaam(std::string s)
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling setNaam");
 	naam = s;
 }
 void MziekenMhuis::setLocatie(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling setLocatie");
 	locatie = p;
 }
 void MziekenMhuis::setIngang(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling setIngang");
 	ingang = p;
 }
 void MziekenMhuis::setGrootte(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling setGrootte");
 	grootte = p;
 }
 Location MziekenMhuis::getLocatie()
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling getLocatie");
 	return locatie;
 }
 Location MziekenMhuis::getIngang()
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling getIngang");
 	return ingang;
 }
 Location MziekenMhuis::getGrootte()
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling getGrootte");
 	return grootte;
 }
 std::string MziekenMhuis::getNaam()
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling getNaam");
 	return naam;
 }
 char MziekenMhuis::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling getKarakter");
 	return karakter;
 }
 Vstadsdeel::Type MziekenMhuis::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "MziekenMhuis wasn't initialized when calling getType");
 	return type;
 }
 
@@ -1687,42 +1757,52 @@ bool Mbrandweerwagen::properlyInitialized()
 }
 void Mbrandweerwagen::setNaam(std::string n)
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling setNaam");
 	naam = n;
 }
 void Mbrandweerwagen::setBasis(std::string b)
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling setBasis");
 	basis = b;
 }
 void Mbrandweerwagen::setLocatie(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling setLocatie");
 	locatie = p;
 }
 void Mbrandweerwagen::setRichting(Vstadsdeel::Richting r)
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling setRichting");
 	richting = r;
 }
 Location Mbrandweerwagen::getLocatie()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling getLocatie");
 	return locatie;
 }
 Vstadsdeel::Richting Mbrandweerwagen::getRichting()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling getRichting");
 	return richting;
 }
 std::string Mbrandweerwagen::getBasis()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling getBasis");
 	return basis;
 }
 std::string Mbrandweerwagen::getNaam()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling getNaam");
 	return naam;
 }
 char Mbrandweerwagen::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling getKarakter");
 	return karakter;
 }
 Vstadsdeel::Type Mbrandweerwagen::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Mbrandweerwagen wasn't initialized when calling getType");
 	return type;
 }
 
@@ -1740,42 +1820,52 @@ bool Mpolitiewagen::properlyInitialized()
 }
 void Mpolitiewagen::setNaam(std::string n)
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling setNaam");
 	naam = n;
 }
 void Mpolitiewagen::setBasis(std::string b)
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling setBasis");
 	basis = b;
 }
 void Mpolitiewagen::setRichting(Vstadsdeel::Richting r)
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling setRichting");
 	richting = r;
 }
 void Mpolitiewagen::setLocatie(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling setLocatie");
 	locatie = p;
 }
 Vstadsdeel::Richting Mpolitiewagen::getRichting()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling getRichting");
 	return richting;
 }
 Location Mpolitiewagen::getLocatie()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling getLocatie");
 	return locatie;
 }
 std::string Mpolitiewagen::getBasis()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling getBasis");
 	return basis;
 }
 std::string Mpolitiewagen::getNaam()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling getNaam");
 	return naam;
 }
 char Mpolitiewagen::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling getKarakter");
 	return karakter;
 }
 Vstadsdeel::Type Mpolitiewagen::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Mpolitiewagen wasn't initialized when calling getType");
 	return type;
 }
 
@@ -1793,42 +1883,52 @@ bool Mambulance::properlyInitialized()
 }
 void Mambulance::setNaam(std::string n)
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling setNaam");
 	naam = n;
 }
 void Mambulance::setBasis(std::string b)
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling setBasis");
 	basis = b;
 }
 void Mambulance::setRichting(Vstadsdeel::Richting r)
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling setRichting");
 	richting = r;
 }
 void Mambulance::setLocatie(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling setLocatie");
 	locatie = p;
 }
 Vstadsdeel::Richting Mambulance::getRichting()
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling getRichting");
 	return richting;
 }
 Location Mambulance::getLocatie()
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling getLocatie");
 	return locatie;
 }
 std::string Mambulance::getBasis()
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling getBasis");
 	return basis;
 }
 std::string Mambulance::getNaam()
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling getNaam");
 	return naam;
 }
 char Mambulance::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling getKarakter");
 	return karakter;
 }
 Vstadsdeel::Type Mambulance::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Mambulance wasn't initialized when calling getType");
 	return type;
 }
 
@@ -1848,34 +1948,42 @@ bool Mstraat::properlyInitialized()
 }
 void Mstraat::setNaam(std::string n)
 {
+    //REQUIRE(this->properlyInitialized(), "Mstraat wasn't initialized when calling setNaam");
 	naam = n;
 }
 void Mstraat::setBegin(Location b)
 {
+    //REQUIRE(this->properlyInitialized(), "Mstraat wasn't initialized when calling setBegin");
 	begin = b;
 }
 void Mstraat::setEinde(Location e)
 {
+    //REQUIRE(this->properlyInitialized(), "Mstraat wasn't initialized when calling setEinde");
 	einde = e;
 }
 std::string Mstraat::getNaam()
 {
+    //REQUIRE(this->properlyInitialized(), "Mstraat wasn't initialized when calling getNaam");
 	return naam;
 }
 Location Mstraat::getBegin()
 {
+    //REQUIRE(this->properlyInitialized(), "Mstraat wasn't initialized when calling getBegin");
 	return begin;
 }
 Location Mstraat::getEinde()
 {
+    //REQUIRE(this->properlyInitialized(), "Mstraat wasn't initialized when calling getEinde");
 	return einde;
 }
 char Mstraat::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Mstraat wasn't initialized when calling getKarakter");
 	return karakter;
 }
 Vstadsdeel::Type Mstraat::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Mstraat wasn't initialized when calling getType");
 	return type;
 }
 /*
@@ -1898,34 +2006,42 @@ bool Mhuis::properlyInitialized()
 }
 void Mhuis::setInBrand(bool i)
 {
+    //REQUIRE(this->properlyInitialized(), "Mhuis wasn't initialized when calling setInBrand");
 	inBrand = i;
 }
 bool Mhuis::getInBrand()
 {
+    //REQUIRE(this->properlyInitialized(), "Mhuis wasn't initialized when calling getInBrand");
 	return inBrand;
 }
 void Mhuis::setLocatie(Location l)
 {
+    //REQUIRE(this->properlyInitialized(), "Mhuis wasn't initialized when calling setLocatie");
 	locatie = l;
 }
 void Mhuis::setBrandbaarheid(int b)
 {
+    //REQUIRE(this->properlyInitialized(), "Mhuis wasn't initialized when calling setBrandbaarheid");
 	brandbaarheid = b;
 }
 int Mhuis::getBrandbaarheid()
 {
+    //REQUIRE(this->properlyInitialized(), "Mhuis wasn't initialized when calling getBrandbaarheid");
 	return brandbaarheid;
 }
 Location Mhuis::getLocatie()
 {
+    //REQUIRE(this->properlyInitialized(), "Mhuis wasn't initialized when calling getLocatie");
 	return locatie;
 }
 char Mhuis::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Mhuis wasn't initialized when calling getKarakter");
 	return karakter;
 }
 Vstadsdeel::Type Mhuis::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Mhuis wasn't initialized when calling getType");
 	return type;
 }
 
@@ -1949,50 +2065,62 @@ bool Mwinkel::properlyInitialized()
 }
 void Mwinkel::setInBrand(bool i)
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling setInBrand");
 	inBrand = i;
 }
 bool Mwinkel::getInBrand()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getInBrand");
 	return inBrand;
 }
 void Mwinkel::setLocatie(Location l)
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling setLocatie");
 	locatie = l;
 }
 void Mwinkel::setGrootte(Location p)
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling setGrootte");
 	grootte = p;
 }
 void Mwinkel::setBrandbaarheid(int b)
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling setBrandbaarheid");
 	brandbaarheid = b;
 }
 void Mwinkel::setOvervalbaarheid(int b)
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling setOvervalbaarheid");
 	overvalbaarheid = b;
 }
 int Mwinkel::getBrandbaarheid()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getBrandbaarheid");
 	return brandbaarheid;
 }
 int Mwinkel::getOvervalbaarheid()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getOvervalbaarheid");
 	return overvalbaarheid;
 }
 Location Mwinkel::getLocatie()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getLocatie");
 	return locatie;
 }
 Location Mwinkel::getGrootte()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getGrootte");
 	return grootte;
 }
 char Mwinkel::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getKarakter");
 	return karakter;
 }
 Vstadsdeel::Type Mwinkel::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getType");
 	return type;
 }
 
@@ -2012,34 +2140,42 @@ bool Mkruispunt::properlyInitialized()
 }
 void Mkruispunt::setEersteMstraat(std::string s)
 {
+    //REQUIRE(this->properlyInitialized(), "Mkruispunt wasn't initialized when calling setEersteMstraat");
 	eersteMstraat = s;
 }
 void Mkruispunt::setTweedeMstraat(std::string s)
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling setTweedeMstraat");
 	tweedeMstraat = s;
 }
 void Mkruispunt::setLocatie(Location l)
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling setLocatie");
 	locatie = l;
 }
 std::string Mkruispunt::getEersteMstraat()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getEersteMstraat");
 	return eersteMstraat;
 }
 std::string Mkruispunt::getTweedeMstraat()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getTweedeMstraat");
 	return tweedeMstraat;
 }
 char Mkruispunt::getKarakter()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling setKarakter");
 	return karakter;
 }
 std::string Mkruispunt::getNaam()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getNaam");
 	return eersteMstraat;
 }
 Vstadsdeel::Type Mkruispunt::getType()
 {
+    //REQUIRE(this->properlyInitialized(), "Mwinkel wasn't initialized when calling getType");
 	return type;
 }
 /*
@@ -2047,25 +2183,35 @@ METHODES VOOR OUTPUTCLASS
 */
 OutputClass::OutputClass(void)
 {
+    _initCheck = this;
 	status = new std::ofstream("status.txt", std::ofstream::out);
 	console = new std::ofstream("console.txt", std::ofstream::out);
+    //ENSURE(properlyInitialized(), "Constructor must end in properlyInitialized state");
+}
+bool OutputClass::properlyInitialized()
+{
+    return _initCheck == this;
 }
 void OutputClass::writeToConsole(std::string s)
 {
+    //REQUIRE(this->properlyInitialized(), "OutputClass wasn't initialized when calling writeToConsole");
 	*console << s << std::endl;
 }
 void OutputClass::writeToConsole()
 {
+    //REQUIRE(this->properlyInitialized(), "OutputClass wasn't initialized when calling writeToConsole");
 	*console << std::endl;
 }
 void OutputClass::writeToStatus(std::string s)
 {
+    //REQUIRE(this->properlyInitialized(), "OutputClass wasn't initialized when calling writeToStatus");
 	if (ui.getSU())
 	{
 		*status << s << std::endl;
 	}
 }void OutputClass::writeToStatus()
 {
+    //REQUIRE(this->properlyInitialized(), "OutputClass wasn't initialized when calling writeToStatus");
 	if (ui.getSU())
 	{
 		*status << std::endl;
@@ -2078,10 +2224,16 @@ METHODES VOOR UI
 UI::UI()
 {
 	_initCheck = this;
+    //ENSURE(properlyInitialized(), "Constructor must end in properlyInitialized state");
+}
+bool UI::properlyInitialized()
+{
+    return _initCheck == this;
 }
 
 void UI::showMenu()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling showMenu");
 	std::cout << "(1) Invoerbestand met stad inlezen" << std::endl;
 	std::cout << "(2) Invoerbestand met voertuigen inlezen" << std::endl;
 	std::cout << "(3) Mhuis in brand steken" << std::endl;
@@ -2138,6 +2290,7 @@ void UI::showMenu()
 
 void UI::leesBestandStad()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling leesBestandStad");
 	std::string s = "";
 	std::cout << "-=-=-=-=-=-=-=-=-=-=-" << std::endl;
 	std::cout << "Geef het bestandnaam op: ";
@@ -2149,6 +2302,7 @@ void UI::leesBestandStad()
 
 void UI::leesBestandVoertuigen()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling LeesBestandVoertuigen");
 	std::string s = "";
 	std::cout << "-=-=-=-=-=-=-=-=-=-=-" << std::endl;
 	std::cout << "Geef het bestandnaam op: ";
@@ -2160,6 +2314,7 @@ void UI::leesBestandVoertuigen()
 
 void UI::startBrand()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling startBrand");
 	int x = 0; int y = 0; Location coord;
 	std::cout << "-=-=-=-=-=-=-=-=-=-=-" << std::endl;
 	std::cout << "Geef de x coordinaat van het Mhuis op: ";
@@ -2178,6 +2333,7 @@ void UI::startBrand()
 }
 void UI::startOverval()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling startOverval");
 	int x = 0; int y = 0; Location coord;
 	std::cout << "-=-=-=-=-=-=-=-=-=-=-" << std::endl;
 	std::cout << "Geef de x coordinaat van de Mwinkel op: ";
@@ -2194,6 +2350,7 @@ void UI::startOverval()
 }
 bool UI::startMbrandweerwagen()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling startMbrandweerwagen");
 	return true;
 }
 void UI::setSteps()
@@ -2208,18 +2365,22 @@ void UI::setSteps()
 }
 void UI::setChoice(int c)
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling setChoice");
 	int choice = c;
 }
 void UI::setSU(bool s) //Simpele Uitvoer
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling setSU");
 	SU = s;
 }
 void UI::setStad(Stad* s)
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling setStad");
 	stad = s;
 }
 void UI::runSimulatie()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling runSimulatie");
 	for (int i = 0; i < steps; i++) {
 		stad->simulatie2();
 	}
@@ -2227,10 +2388,12 @@ void UI::runSimulatie()
 }
 bool UI::getSU()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling getSU");
 	return SU;
 }
 void UI::showMap()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling showMap");
 	stad->printStad();
 	showMenu();
 }
