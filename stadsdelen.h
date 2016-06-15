@@ -426,6 +426,7 @@ public:
 	void writeToStatus(std::string);
 	void writeToStatus();
 private:
+    OutputClass* _initCheck;
 	std::ofstream* status;
 	std::ofstream* console;
 };

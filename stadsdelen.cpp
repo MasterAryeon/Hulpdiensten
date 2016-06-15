@@ -22,6 +22,16 @@ Version: 2.1
 OutputClass output;
 UI ui;
 
+bool legalInput(int i)
+{
+    if ((i < 7) && (i >= 0)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 Location::Location()
 {
     _initCheck = this;
@@ -2245,6 +2255,7 @@ void UI::showMenu()
 	std::cout << "-----------------------------------" << std::endl;
 	std::cout << "Uw keuze: ";
 	std::cin >> choice;
+    //REQUIRE(legalInput(choice),"Constructor requires a number between 0 and 7 as correct input");
 	switch (choice) {
 		case 1:
         {
@@ -2355,6 +2366,7 @@ bool UI::startMbrandweerwagen()
 }
 void UI::setSteps()
 {
+    //REQUIRE(this->properlyInitialized(), "UI wasn't initialized when calling setSteps");
 	int s = 0; 
 	std::cout << "-=-=-=-=-=-=-=-=-=-=-" << std::endl;
 	std::cout << "Geef het aantal stappen voor elke simulatieronde: ";
