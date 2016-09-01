@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<Voertuigen>
+	<Brandweerwagen>
+		<Naam>Bw12</Naam>
+		<Basis>BWK1337</Basis>
+	</Brandweerwagen>
+	<Brandweerwagen>
+		<Naam>Bw34</Naam>
+		<Basis>BWK1337</Basis>
+	</Brandweerwagen>
+	<Politiewagen>
+		<Naam>Pw3</Naam>
+		<Basis>PB134</Basis>
+	</Politiewagen>
+	<Politiewagen>
+		<Naam>Pw4</Naam>
+		<Basis>PB134</Basis>
+	</Politiewagen>
+	<Ziekenwagen>
+		<Naam>Zw7</Naam>
+		<Basis>Middelheim</Basis>
+	</Ziekenwagen>
+</Voertuigen>

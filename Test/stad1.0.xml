@@ -1,0 +1,264 @@
+<?xml version="1.0" ?>
+<VirtueleStad>
+	<Brandweerkazerne>
+		<Naam>BWK1337</Naam>
+		<Locatie X="8" Y="9"/>
+		<Ingang X="8" Y="10"/>
+	</Brandweerkazerne>
+	<Brandweerwagen>
+		<Naam>Bw12</Naam>
+		<Basis>BWK1337</Basis>
+	</Brandweerwagen>
+	<Brandweerwagen>
+		<Naam>Bw34</Naam>
+		<Basis>BWK1337</Basis>
+	</Brandweerwagen>
+	<Straat>
+		<Naam>Pythonstraat</Naam>
+		<Van x="0" y="15"/>
+		<Naar x="21" y="15"/>
+	</Straat>
+	<Straat>
+		<Naam>Cstraat</Naam>
+		<Van x="0" y="10"/>
+		<Naar x="21" y="10"/>
+	</Straat>
+	<Straat>
+		<Naam>Haskellstraat</Naam>
+		<Van x="0" y="5"/>
+		<Naar x="21" y="5"/>
+	</Straat>
+	<Straat>
+		<Naam>Lispstraat</Naam>
+		<Van x="0" y="0"/>
+		<Naar x="21" y="0"/>
+	</Straat>
+	<Straat>
+		<Naam>Assemblystraat</Naam>
+		<Van x="0" y="0"/>
+		<Naar x="0" y="15"/>
+	</Straat>
+	<Straat>
+		<Naam>Javastraat</Naam>
+		<Van x="7" y="0"/>
+		<Naar x="7" y="15"/>
+	</Straat>
+	<Straat>
+		<Naam>Eiffelstraat</Naam>
+		<Van x="16" y="0"/>
+		<Naar x="16" y="15"/>
+	</Straat>
+	<Straat>
+		<Naam>Rubystraat</Naam>
+		<Van x="21" y="0"/>
+		<Naar x="21" y="15"/>
+	</Straat>
+	
+	<Huis>
+		<Locatie X="1" Y="14"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="3" Y="14"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="5" Y="14"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="8" Y="14"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="10" Y="14"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="12" Y="14"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="14" Y="14"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="17" Y="14"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="19" Y="14"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	
+	
+	<Huis>
+		<Locatie X="1" Y="12"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="3" Y="12"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="5" Y="12"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="8" Y="12"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="10" Y="12"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="12" Y="12"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="14" Y="12"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="17" Y="12"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="19" Y="12"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	
+	<Huis>
+		<Locatie X="1" Y="9"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="3" Y="9"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="5" Y="9"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="12" Y="9"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="14" Y="9"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="17" Y="9"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="19" Y="9"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	
+	<Huis>
+		<Locatie X="1" Y="7"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="3" Y="7"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="5" Y="7"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="12" Y="7"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="14" Y="7"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="17" Y="7"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="19" Y="7"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	
+	
+	<Huis>
+		<Locatie X="1" Y="4"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="3" Y="4"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="5" Y="4"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="8" Y="4"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="10" Y="4"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="12" Y="4"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="14" Y="4"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="17" Y="4"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="19" Y="4"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="1" Y="2"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="3" Y="2"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="5" Y="2"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="8" Y="2"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="10" Y="2"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="12" Y="2"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="14" Y="2"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="17" Y="2"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	<Huis>
+		<Locatie X="19" Y="2"/>
+		<Brandbaarheid>20</Brandbaarheid>
+	</Huis>
+	
+</VirtueleStad>

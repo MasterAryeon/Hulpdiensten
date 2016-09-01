@@ -1,0 +1,32 @@
+-=-=-=-=-=-=-=-=-=-=-=-
+Project Software Engineering - door Aron Cornet en Tim Goossens
+Specificatie 2.0
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Loading file - s.xml - succesful
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Project Software Engineering - door Aron Cornet en Tim Goossens
+Specificatie 2.0
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Failed to open/load file
+-=-=-=-=-=-=-=-=-=-=-=-
+Inconsistente Stad: Stad bevat nullptr(s)!
+-=-=-=-=-=-=-=-=-=-=-=-
+Loading file - s.xml - succesful
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Project Software Engineering - door Aron Cornet en Tim Goossens
+Specificatie 2.0
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Loading file - s.xml - succesful
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Project Software Engineering - door Aron Cornet en Tim Goossens
+Specificatie 2.0
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Loading file - s.xml - succesful
+-=-=-=-=-=-=-=-=-=-=-=-
