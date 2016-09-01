@@ -1,0 +1,51 @@
+-=-=-=-=-=-=-=-=-=-=-=-
+Project Software Engineering - door Aron Cornet en Tim Goossens
+Specificatie 2.0
+-=-=-=-=-=-=-=-=-=-=-=-
+Legenda:
+-=-=-=-=-=-=-=-=-=-=-=-
+H = Onderdeel van een Huis
+# = Onderdeel van een brandend Huis
+K = Onderdeel van de Kazerne
+Z = Onderdeel van het Ziekenhuis
+P = Onderdeel van het Politiebureau
+W = Onderdeel van de Winkel
+  = Onderdeel van een Straat
+-=-=-=-=-=-=-=-=-=-=-=-
+* = Brandweerwagen
+= = Ambulance
+% = Politiewagen
+-=-=-=-=-=-=-=-=-=-=-=-
+                                            
+  H H H H H H   H H H H H H H H   H H H H   
+  H H H H H H   H H H H H H H H   H H H H   
+  H H H H H H   W W W W H H H H   H H H H   
+  H H H H H H   W W W W H H H H   H H H H   
+                                            
+  H H H H H H   K K K K W W W W   H H H H   
+  H H H H H H   K K K K W W W W   H H H H   
+  H H H H H H   K K K K W W W W   H H H H   
+  H H H H H H   K K K K W W W W   H H H H   
+                                            
+  Z Z Z Z Z Z   P P P P H H H H   H H H H   
+  Z Z Z Z Z Z   P P P P H H H H   H H H H   
+  Z Z Z Z Z Z   H H H H H H H H   H H H H   
+  Z Z Z Z Z Z   H H H H H H H H   H H H H   
+                                            
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+Bw12 op locatie (1,2) is onderweg naar (5,12)
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-

@@ -50,7 +50,7 @@ public:
 	virtual std::string getEersteMstraat();
 	virtual std::string getTweedeMstraat();
 private:
-	bool inBrand;
+	bool inBrand = false;
 	int brandbaarheid;
 	int overvalbaarheid;
 	Vstadsdeel* _initCheck;
@@ -277,7 +277,7 @@ public:
 	Type getType();
 private:
 	Location locatie;
-	bool inBrand;
+	bool inBrand = false;
 	int brandbaarheid;
 	char karakter = 'H';
 	Type type = House;
@@ -309,7 +309,7 @@ public:
 private:
 	Location locatie;
 	Location grootte;
-	bool inBrand;
+	bool inBrand = false;
 	int brandbaarheid; int overvalbaarheid;
 	char karakter = 'W';
 	Type type = Store;
@@ -420,15 +420,15 @@ class OutputClass
 {
 public:
 	OutputClass();
-    bool properlyInitialized();
 	void writeToConsole(std::string);
 	void writeToConsole();
 	void writeToStatus(std::string);
 	void writeToStatus();
+	bool properlyInitialized();
 private:
-    OutputClass* _initCheck;
 	std::ofstream* status;
 	std::ofstream* console;
+	OutputClass* _initCheck;
 };
 
 /*
@@ -438,6 +438,8 @@ CLASS UI
 class UI
 {
 public:
+	bool properlyInitialized();
+	UI();
 	void showMenu();
 	void setSteps();
 	void setChoice(int);
@@ -451,8 +453,6 @@ public:
 	bool startMbrandweerwagen();
 	bool getSU();
 	void showMap();
-    bool properlyInitialized();
-	UI();
 
 private:
 	Stad* stad;
