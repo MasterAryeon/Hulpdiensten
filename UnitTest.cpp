@@ -219,7 +219,6 @@ TEST(Stadsdelen_Setters, Stadsdelen)
 	EXPECT_EQ(s1, k->getEersteMstraat());
 	EXPECT_EQ(s2, k->getTweedeMstraat());
 	EXPECT_EQ(Vstadsdeel::Crossroad, k->getType());
-	system("pause");
 }
 
 
