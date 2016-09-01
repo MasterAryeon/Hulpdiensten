@@ -2,3 +2,167 @@
 Project Software Engineering - door Aron Cornet en Tim Goossens
 Specificatie 2.0
 -=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Brandweerwagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Ambulances onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Huizen die in brand staan:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Politiewagens onderweg:
+-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-
+Winkels die overvallen worden:
+-=-=-=-=-=-=-=-=-=-=-=-
+Legenda:
+-=-=-=-=-=-=-=-=-=-=-=-
+H = Onderdeel van een Huis
+# = Onderdeel van een brandend Huis
+K = Onderdeel van de Kazerne
+Z = Onderdeel van het Ziekenhuis
+P = Onderdeel van het Politiebureau
+W = Onderdeel van de Winkel
+  = Onderdeel van een Straat
+-=-=-=-=-=-=-=-=-=-=-=-
+* = Brandweerwagen
+= = Ambulance
+% = Politiewagen
+-=-=-=-=-=-=-=-=-=-=-=-
